@@ -25,8 +25,6 @@ Respeite o seu nível de conhecimento e experiência, o importante é você sabe
 ## O PROJETO
 A seguir seguem uma história do usuário e os seus cenários para o desenvolvimento. 
 
-**PRAZO**: 3 dias após o envio do teste.
-
 ```feature
 Funcionalidade: Gestão de reservas de quartos.
 
