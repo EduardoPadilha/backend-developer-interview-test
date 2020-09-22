@@ -28,8 +28,6 @@ A seguir seguem uma história do usuário e os seus cenários para o desenvolvim
 **PRAZO**: 3 dias após o envio do teste.
 
 ```feature
-#language: pt-br
-
 Funcionalidade: Gestão de reservas de quartos.
 
   "Eu, como o um dos responsáveis pela gestão de reservas do hotel Férias & Co, 
