@@ -29,6 +29,7 @@ A seguir seguem uma história do usuário e os seus cenários para o desenvolvim
 
 ```feature
 #language: pt-br
+
 Funcionalidade: Gestão de reservas de quartos.
 
   "Eu, como o um dos responsáveis pela gestão de reservas do hotel Férias & Co, 
@@ -48,14 +49,14 @@ Funcionalidade: Gestão de reservas de quartos.
     Quando solicitado a reserva
     Então garanta que os dados sejam armazenados
     E gere um indentificador único para essa transação.
-    
-    Cenário: Quarto já reservado.
-      Dado uma nova reserva de quarto
-      E fornecido id de um quarto ja esteja reservado 
-      Quando solicitado a reserva
-      Então garanta que os dados não sejam armazenados
-      E informe que o quarto está reservado.
-    
+
+  Cenário: Quarto já reservado.
+    Dado uma nova reserva de quarto
+    E fornecido id de um quarto ja esteja reservado 
+    Quando solicitado a reserva
+    Então garanta que os dados não sejam armazenados
+    E informe que o quarto está reservado.
+
   Cenário: Quarto inexistente.
     Dado uma nova reserva de quarto
     E fornecido id de um quarto que seja inexistente 
