@@ -1,7 +1,5 @@
 # BACK-END DEVELOPER INTERVIEW TEST
----
-prazo: 3 dias após o envio do teste
----
+
 Ao conhecer uma pessoa que está aplicando para a Férias & Co gostamos de ter uma conversa sobre código. Afinal, escrever, ler e discutir sobre código faz parte da nossa rotina diária de trabalho.
 
 ## O QUE VAMOS AVALIAR
@@ -24,8 +22,10 @@ Caso você não se sinta confortável com algum desses itens, tudo bem, apenas n
 
 Respeite o seu nível de conhecimento e experiência, o importante é você saber dizer o motivo das suas escolhas. Se você tiver qualquer dúvida, por favor, entre em contato com a gente. Se quiser uma revisão no seu código em um Pull Request no Github, pode nos chamar. Estamos disponíveis para te ajudar a finalizar esse processo. Ah, por último. Você acha que consegue nos responder em quanto tempo? Duas semanas é ok para você?
 
-## O Projeto
-A seguir seguem uma história do usuário e os seus cenários para o desenvolvimento
+## O PROJETO
+A seguir seguem uma história do usuário e os seus cenários para o desenvolvimento. 
+
+**PRAZO**: 3 dias após o envio do teste.
 
 ```feature
 #language: pt-br
