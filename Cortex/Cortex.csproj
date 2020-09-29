@@ -5,4 +5,8 @@
     <RootNamespace>FeriasCo.Cortex</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="9.2.2" />
+  </ItemGroup>
+
 </Project>
