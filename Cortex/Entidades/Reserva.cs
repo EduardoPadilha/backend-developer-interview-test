@@ -8,14 +8,12 @@ namespace FeriasCo.Cortex.Entidades
     {
         public DateTime Checkin { get; set; }
         public DateTime Checkout { get; set; }
-        public List<QuartoDaReserva> Quartos { get; set; }
-        public Hospede Pagante => Quartos?.SelectMany(c => c.Hospedes)?.FirstOrDefault(c => c.Pagante);
-        public bool HaPagante => Pagante != null;
+        public List<QuartoDaReserva> Quartos { get; set; } = new List<QuartoDaReserva>();
     }
 
     public class QuartoDaReserva : EntidadeBase
     {
-        public List<Hospede> Hospedes { get; set; }
+        public List<Hospede> Hospedes { get; set; } = new List<Hospede>();
     }
 
     public class Hospede : EntidadeBase

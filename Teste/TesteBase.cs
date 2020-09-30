@@ -20,8 +20,10 @@ namespace FeriasCo.Teste
             container.Register<IValidador<Reserva>, ReservaValidador>();
             container.Register<IReservaRepositorio, ReservaRepositorio>();
             container.Register<IReservaResumoRepositorio, ReservaResumoRepositorio>();
-            container.Register<IQuartoResumoRepositorio, QuartoResumoRepositorio>();
+            container.Register<IQuartoRepositorio, QuartoRepositorio>();
             container.Register<ReservaServico>();
+
+            container.Verify();
         }
     }
 }

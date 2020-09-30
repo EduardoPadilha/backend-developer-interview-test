@@ -133,11 +133,11 @@ namespace FeriasCo.Teste.Validacoes
         {
             var resultadoValidacao = reservaValidacao.Validar(reservas[0]);
             Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
-            Assert.True(resultadoValidacao.Erros.Count == 4);
+            Assert.True(resultadoValidacao.Erros.Count() == 4);
 
             resultadoValidacao = reservaValidacao.Validar(reservas[1]);
             Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
-            Assert.True(resultadoValidacao.Erros.Count == 1);
+            Assert.True(resultadoValidacao.Erros.Count() == 1);
 
             resultadoValidacao = reservaValidacao.Validar(reservas[2]);
             Assert.True(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));

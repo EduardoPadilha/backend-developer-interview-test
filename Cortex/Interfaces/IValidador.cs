@@ -10,7 +10,7 @@ namespace FeriasCo.Cortex.Interfaces
     public interface IResultadoValidacao
     {
         bool Valido { get; }
-        IList<IFalhaValidacao> Erros { get; }
+        IEnumerable<IFalhaValidacao> Erros { get; }
         string ToString(string separador);
     }
 

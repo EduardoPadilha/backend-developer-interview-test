@@ -11,10 +11,10 @@ namespace FeriasCo.Cortex.Servicos
         private readonly IValidador<Reserva> validador;
         private readonly IReservaRepositorio repositorio;
         private readonly IReservaResumoRepositorio repositorioResumo;
-        private readonly IQuartoResumoRepositorio quartoRepositorio;
+        private readonly IQuartoRepositorio quartoRepositorio;
 
         public ReservaServico(IValidador<Reserva> validador, IReservaRepositorio repositorio,
-            IReservaResumoRepositorio repositorioResumo, IQuartoResumoRepositorio quartoRepositorio)
+            IReservaResumoRepositorio repositorioResumo, IQuartoRepositorio quartoRepositorio)
         {
             this.validador = validador;
             this.repositorio = repositorio;

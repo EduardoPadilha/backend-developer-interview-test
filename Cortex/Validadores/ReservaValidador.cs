@@ -1,5 +1,6 @@
 ﻿using FeriasCo.Cortex.Entidades;
 using FluentValidation;
+using System.Linq;
 
 namespace FeriasCo.Cortex.Validadores
 {
@@ -22,8 +23,11 @@ namespace FeriasCo.Cortex.Validadores
             RuleForEach(x => x.Quartos)
                 .SetValidator(new QuartoDaReservaValidador());
 
-            RuleFor(x => x.HaPagante)
-               .Equal(true)
+            RuleFor(x => x)
+               .Must(x =>
+               {
+                   return x.Quartos?.SelectMany(c => c.Hospedes)?.Any(c => c.Pagante) ?? false;
+               })
                .WithMessage("O responsável pelo pagamento da reserva deve ser informado");
         }
     }

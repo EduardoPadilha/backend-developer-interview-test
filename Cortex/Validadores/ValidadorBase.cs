@@ -20,13 +20,13 @@ namespace FeriasCo.Cortex.Validadores
 
     public class ResultadoValidacao : IResultadoValidacao
     {
-        public ResultadoValidacao(bool valido, IList<IFalhaValidacao> erros)
+        public ResultadoValidacao(bool valido, IEnumerable<IFalhaValidacao> erros)
         {
             this.Valido = valido;
             this.Erros = erros;
         }
         public bool Valido { get; }
-        public IList<IFalhaValidacao> Erros { get; }
+        public IEnumerable<IFalhaValidacao> Erros { get; }
 
         public string ToString(string separador)
         {
