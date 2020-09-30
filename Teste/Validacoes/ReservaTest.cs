@@ -1,18 +1,17 @@
 ﻿using FeriasCo.Cortex.Entidades;
-using FeriasCo.Cortex.Validacoes;
-using FluentValidation.Results;
+using FeriasCo.Cortex.Validadores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Teste.Validacoes
+namespace FeriasCo.Teste.Validacoes
 {
     public class ReservaTest
     {
-        private readonly HospedeValidacao hospedeValidacao;
-        private readonly QuartoDaReservaValidacao quartoValidacao;
-        private readonly ReservaValidacao reservaValidacao;
+        private readonly HospedeValidador hospedeValidacao;
+        private readonly QuartoDaReservaValidador quartoValidacao;
+        private readonly ReservaValidador reservaValidacao;
 
         static readonly List<Hospede> hospedes = new List<Hospede>
         {
@@ -55,33 +54,23 @@ namespace Teste.Validacoes
         };
         static readonly List<QuartoDaReserva> quartos = new List<QuartoDaReserva>
         {
-            //Valida Capacidade
-            new QuartoDaReserva
-            {
-                Capacidade = 2,
-                Hospedes = hospedes
-            },
             //validar Hospedes
             new QuartoDaReserva
             {
-                Capacidade = 2,
                 Hospedes = hospedes.Take(2).ToList()
             },
             //validar Hospedes vazio
             new QuartoDaReserva
             {
-                Capacidade = 2,
             },
             //Valido
             new QuartoDaReserva
             {
-                Capacidade = 2,
                 Hospedes = hospedes.Skip(4).Take(1).ToList()
             },
             //Valido com pagante
             new QuartoDaReserva
             {
-                Capacidade = 2,
                 Hospedes = hospedes.Skip(5).ToList()
             }
         };
@@ -94,71 +83,64 @@ namespace Teste.Validacoes
             {
                 Checkin = new DateTime(2020, 12,12),
                 Checkout = new DateTime(2020, 12, 15),
-                Quartos = quartos.Skip(3).Take(1).ToList()
+                Quartos = quartos.Skip(2).Take(1).ToList()
             },
             //Valido
             new Reserva
             {
                 Checkin = new DateTime(2020, 12,12),
                 Checkout = new DateTime(2020, 12, 15),
-                Quartos = quartos.Skip(4).ToList()
+                Quartos = quartos.Skip(3).ToList()
             }
 
         };
 
         public ReservaTest()
         {
-            hospedeValidacao = new HospedeValidacao();
-            quartoValidacao = new QuartoDaReservaValidacao();
-            reservaValidacao = new ReservaValidacao();
+            hospedeValidacao = new HospedeValidador();
+            quartoValidacao = new QuartoDaReservaValidador();
+            reservaValidacao = new ReservaValidador();
         }
 
         [Fact]
         public void ValidarHospedes()
         {
-            var resultadoValidacao = hospedeValidacao.Validate(hospedes[0]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = hospedeValidacao.Validate(hospedes[1]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = hospedeValidacao.Validate(hospedes[2]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = hospedeValidacao.Validate(hospedes[3]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = hospedeValidacao.Validate(hospedes[4]);
-            Assert.True(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
+            var resultadoValidacao = hospedeValidacao.Validar(hospedes[0]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = hospedeValidacao.Validar(hospedes[1]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = hospedeValidacao.Validar(hospedes[2]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = hospedeValidacao.Validar(hospedes[3]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = hospedeValidacao.Validar(hospedes[4]);
+            Assert.True(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
         }
 
         [Fact]
         public void ValidarQuartos()
         {
-            var resultadoValidacao = quartoValidacao.Validate(quartos[0]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = quartoValidacao.Validate(quartos[1]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = quartoValidacao.Validate(quartos[2]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            resultadoValidacao = quartoValidacao.Validate(quartos[3]);
-            Assert.True(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
+            var resultadoValidacao = quartoValidacao.Validar(quartos[0]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = quartoValidacao.Validar(quartos[1]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            resultadoValidacao = quartoValidacao.Validar(quartos[2]);
+            Assert.True(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
         }
 
         [Fact]
         public void ValidarReserva()
         {
-            var resultadoValidacao = reservaValidacao.Validate(reservas[0]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            Assert.True(resultadoValidacao.Errors.Count == 4);
+            var resultadoValidacao = reservaValidacao.Validar(reservas[0]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            Assert.True(resultadoValidacao.Erros.Count == 4);
 
-            resultadoValidacao = reservaValidacao.Validate(reservas[1]);
-            Assert.False(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-            Assert.True(resultadoValidacao.Errors.Count == 1);
+            resultadoValidacao = reservaValidacao.Validar(reservas[1]);
+            Assert.False(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
+            Assert.True(resultadoValidacao.Erros.Count == 1);
 
-            resultadoValidacao = reservaValidacao.Validate(reservas[2]);
-            Assert.True(resultadoValidacao.IsValid, EscreveErros(resultadoValidacao.Errors));
-        }
-
-        private static string EscreveErros(IList<ValidationFailure> erros)
-        {
-            return string.Join("\n", erros.Select(e => e.ErrorMessage));
+            resultadoValidacao = reservaValidacao.Validar(reservas[2]);
+            Assert.True(resultadoValidacao.Valido, resultadoValidacao.ToString("\n"));
         }
     }
 }

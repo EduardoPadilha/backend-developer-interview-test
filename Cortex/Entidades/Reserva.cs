@@ -15,9 +15,7 @@ namespace FeriasCo.Cortex.Entidades
 
     public class QuartoDaReserva : EntidadeBase
     {
-        public int Capacidade { get; set; }
         public List<Hospede> Hospedes { get; set; }
-        public bool SuperLotado => (Hospedes?.Count ?? 0) > Capacidade;
     }
 
     public class Hospede : EntidadeBase

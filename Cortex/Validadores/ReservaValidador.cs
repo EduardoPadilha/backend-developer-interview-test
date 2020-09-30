@@ -1,11 +1,11 @@
 ﻿using FeriasCo.Cortex.Entidades;
 using FluentValidation;
 
-namespace FeriasCo.Cortex.Validacoes
+namespace FeriasCo.Cortex.Validadores
 {
-    public class ReservaValidacao : AbstractValidator<Reserva>
+    public class ReservaValidador : ValidadorBase<Reserva>
     {
-        public ReservaValidacao()
+        public ReservaValidador()
         {
             RuleFor(x => x.Checkin)
                 .NotEmpty()
@@ -20,7 +20,7 @@ namespace FeriasCo.Cortex.Validacoes
                 .WithMessage("Pelo menos um quarto precisa ser informado");
 
             RuleForEach(x => x.Quartos)
-                .SetValidator(new QuartoDaReservaValidacao());
+                .SetValidator(new QuartoDaReservaValidador());
 
             RuleFor(x => x.HaPagante)
                .Equal(true)
@@ -28,26 +28,22 @@ namespace FeriasCo.Cortex.Validacoes
         }
     }
 
-    public class QuartoDaReservaValidacao : AbstractValidator<QuartoDaReserva>
+    public class QuartoDaReservaValidador : ValidadorBase<QuartoDaReserva>
     {
-        public QuartoDaReservaValidacao()
+        public QuartoDaReservaValidador()
         {
-            RuleFor(x => x.SuperLotado)
-                .Equal(false)
-                .WithMessage("Há hóspedes acima da capacidade permitida do quarto");
-
             RuleFor(x => x.Hospedes)
                 .NotEmpty()
                 .WithMessage("Pelo menos um hóspede precisa ser informado");
 
             RuleForEach(x => x.Hospedes)
-                .SetValidator(new HospedeValidacao());
+                .SetValidator(new HospedeValidador());
         }
     }
 
-    public class HospedeValidacao : AbstractValidator<Hospede>
+    public class HospedeValidador : ValidadorBase<Hospede>
     {
-        public HospedeValidacao()
+        public HospedeValidador()
         {
             RuleFor(x => x.Cpf)
                 .NotEmpty()
