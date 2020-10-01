@@ -40,7 +40,7 @@ namespace FeriasCo.Mock.Repositorio
             },
         };
 
-        public List<ReservaResumo> Reservas = new List<ReservaResumo>
+        public List<ReservaResumo> ReservasResumo = new List<ReservaResumo>
         {
             #region Quarto 1
             new ReservaResumo
@@ -100,5 +100,7 @@ namespace FeriasCo.Mock.Repositorio
             },
             #endregion
         };
+
+        public List<Reserva> Reservas = new List<Reserva>();
     }
 }

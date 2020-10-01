@@ -1,8 +1,8 @@
-﻿namespace FeriasCo.Cortex.Interfaces.Repositorios.Comando
+﻿namespace FeriasCo.Cortex.Interfaces.Repositorios
 {
     public interface IRepositorioComando<TEntidade> where TEntidade : IEntidade
     {
-        void Adicionar(TEntidade entidade);
+        int Adicionar(TEntidade entidade);
         void Editar(TEntidade entidade);
         void Remover(TEntidade entidade);
     }
