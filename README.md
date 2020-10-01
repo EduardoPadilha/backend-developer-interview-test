@@ -20,12 +20,12 @@ $ cd feriasco/
 
 Criando a imagem no docker
 ```sh
-$ docker build -f ./WebApi/Dockerfile --force-rm -t feriasco.reservas:v0.0.1 .
+$ docker build -f ./WebApi/Dockerfile --force-rm -t feriasco.reservas:v0.0.2 .
 ```
 
 Rodando o serviço no docker
 ```sh
-$ docker run -d -p 5000:80 --name micro-reservas feriasco.reservas:v0.0.1
+$ docker run -d -p 5000:80 --name micro-reservas feriasco.reservas:v0.0.2
 ```
 Após o término o container estrá no ar na porta 5000.
 
