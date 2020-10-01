@@ -1,8 +1,11 @@
 ﻿using FeriasCo.Cortex.Entidades;
+using FeriasCo.Cortex.Entidades.Consultas;
 using FeriasCo.Cortex.Excecoes;
 using FeriasCo.Cortex.Interfaces;
-using FeriasCo.Cortex.Interfaces.Repositorios.Comando;
-using FeriasCo.Cortex.Interfaces.Repositorios.Consulta;
+using FeriasCo.Cortex.Interfaces.Repositorios;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace FeriasCo.Cortex.Servicos
 {
@@ -20,9 +23,8 @@ namespace FeriasCo.Cortex.Servicos
             this.repositorio = repositorio;
             this.repositorioResumo = repositorioResumo;
             this.quartoRepositorio = quartoRepositorio;
-
         }
-        public void RegistrarReserva(Reserva reserva)
+        public int RegistrarReserva(Reserva reserva)
         {
             var resultado = validador.Validar(reserva);
             if (!resultado.Valido)
@@ -30,7 +32,25 @@ namespace FeriasCo.Cortex.Servicos
 
             ValidarQuartos(reserva);
 
-            repositorio.Adicionar(reserva);
+            var id = repositorio.Adicionar(reserva);
+
+            Task.Run(() => AtualizaReservaResumo(reserva));
+
+            return id;
+        }
+
+        private void AtualizaReservaResumo(Reserva reserva)
+        {
+            foreach (var quarto in reserva.Quartos)
+            {
+                var resumo = new ReservaResumo
+                {
+                    Checkin = reserva.Checkin,
+                    Checkout = reserva.Checkout,
+                    Quarto = quarto.Id,
+                };
+                repositorioResumo.Adicionar(resumo);
+            }
         }
 
         private void ValidarQuartos(Reserva reserva)
@@ -48,6 +68,16 @@ namespace FeriasCo.Cortex.Servicos
                 if (dataIndisponivel)
                     throw new QuartoIndisponivelException(quarto.Id);
             }
+        }
+
+        public Reserva Obter(int id)
+        {
+            return repositorio.Obter(id);
+        }
+
+        public List<Reserva> ObterTodos()
+        {
+            return repositorio.ObterTodos().ToList();
         }
     }
 }

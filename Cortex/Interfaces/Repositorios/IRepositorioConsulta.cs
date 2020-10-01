@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace FeriasCo.Cortex.Interfaces.Repositorios.Consulta
+﻿namespace FeriasCo.Cortex.Interfaces.Repositorios
 {
     public interface IRepositorioConsulta<TEntidade> where TEntidade : IEntidade
     {

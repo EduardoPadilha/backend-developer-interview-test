@@ -1,9 +1,9 @@
 ﻿using FeriasCo.Cortex.Entidades;
-using FeriasCo.Cortex.Interfaces.Repositorios.Consulta;
+using FeriasCo.Cortex.Interfaces.Repositorios;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FeriasCo.Mock.Repositorio.Repositorios.Consulta
+namespace FeriasCo.Mock.Repositorio.Repositorios
 {
     public class QuartoRepositorio : IQuartoRepositorio
     {

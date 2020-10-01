@@ -4,6 +4,7 @@ using FeriasCo.Cortex.Servicos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace FeriasCo.WebApi.Controllers
 {
@@ -26,8 +27,10 @@ namespace FeriasCo.WebApi.Controllers
         {
             try
             {
-                reservaServico.RegistrarReserva(reserva);
-                return Created("/", reserva);
+                var id = reservaServico.RegistrarReserva(reserva);
+                reserva.Id = id;
+                var a = Url.Action("Obter", new { id });
+                return Created(a, reserva);
             }
             catch (FeriasCoException e)
             {
@@ -37,6 +40,30 @@ namespace FeriasCo.WebApi.Controllers
             {
                 return StatusCode(500);
             }
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<Reserva> Obter(int id)
+        {
+            var quarto = reservaServico.Obter(id);
+            if (quarto != null)
+                return quarto;
+            return NotFound();
+        }
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<IEnumerable<Reserva>> ObterTodos()
+        {
+            var quartos = reservaServico.ObterTodos();
+            if (quartos != null)
+                return Ok(quartos);
+            return NotFound();
         }
     }
 }

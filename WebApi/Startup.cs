@@ -1,11 +1,9 @@
 using FeriasCo.Cortex.Entidades;
 using FeriasCo.Cortex.Interfaces;
-using FeriasCo.Cortex.Interfaces.Repositorios.Comando;
-using FeriasCo.Cortex.Interfaces.Repositorios.Consulta;
+using FeriasCo.Cortex.Interfaces.Repositorios;
 using FeriasCo.Cortex.Servicos;
 using FeriasCo.Cortex.Validadores;
-using FeriasCo.Mock.Repositorio.Repositorios.Comando;
-using FeriasCo.Mock.Repositorio.Repositorios.Consulta;
+using FeriasCo.Mock.Repositorio.Repositorios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
